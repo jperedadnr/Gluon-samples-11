@@ -12,7 +12,7 @@ Instructions
 To execute the sample on HotSpot, do as follows:
 
 * Desktop (Windows, Mac OS X, Linux)
-  - Just run it from your IDE or from command line: `mvn -Pdesktop javafx:run`
+  - Just run it from your IDE or from command line: `mvn -Photspot javafx:run`
 
 To execute the sample as native image, do as follows:
 
