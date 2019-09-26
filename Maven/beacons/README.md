@@ -17,14 +17,21 @@ To execute the sample on HotSpot, do as follows:
 To execute the sample as native image, do as follows:
 
 * Desktop (Mac OS X, Linux)
-  - Just run it from your IDE or from command line: `mvn client:build client:run`
+  - Just run it from your IDE or from command line: 
+     - `mvn client:compile`
+     - `mvn client:link` 
+     - `mvn client:run`
 
-* iOS (iOS device, iOS simulator)
-   - Uncomment target = "ios" or target = "ios-sim"
-   - Uncomment releaseSymbolsList
-   - Run `mvn client:build`
-   - For iOS device, connect your iOS device with valid signing identity and provisioning profile
-   - Run `mvn client:run`
+* iOS (iOS simulator)
+   - `mvn client:compile@iossim`
+   - `mvn client:link@iossim`
+   - `mvn client:run@iossim`
+
+* iOS (iOS device)
+   - `mvn client:compile@ios`
+   - `mvn client:link@ios`
+   - Connect your iOS device with valid signing identity and provisioning profile (see [deployment documentation](https://docs.gluonhq.com/client/#_ios_deployment))
+   - Run `mvn client:run@ios`
 
 Documentation
 -------------

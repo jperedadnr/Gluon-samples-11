@@ -134,8 +134,6 @@
                 <artifactId>client-maven-plugin</artifactId>
                 <version>0.0.12</version>
                 <configuration>
-                    <!-- Uncomment to run on iOS: -->
-                    <!-- <target>ios</target>-->
                     <attachList>
                         <list>ble</list>
                         <list>display</list>
@@ -170,16 +168,38 @@
                         <list>com.gluonhq.charm.glisten.visual.MaterialDesignIcon</list>
                         <list>com.gluonhq.charm.glisten.control.SettingsPane</list>
                     </reflectionList>
-                    <releaseSymbolsList>
-                    <!-- Uncomment to run on iOS: -->
-<!--                        <list>_Java_com_sun_glass_ui_ios_IosWindow__1updateBounds</list>-->
-<!--                        <list>_Java_com_sun_glass_ui_ios_IosWindow__1updateInput</list>-->
-                    </releaseSymbolsList>
                     <mainClass>${mainClassName}</mainClass>
                 </configuration>
+                <executions>
+                    <execution>
+                        <id>default-cli</id>
+                        <configuration>
+                            <target>host</target>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>ios</id>
+                        <configuration>
+                            <target>ios</target>
+                            <releaseSymbolsList>
+                                <list>_Java_com_sun_glass_ui_ios_IosWindow__1updateBounds</list>
+                                <list>_Java_com_sun_glass_ui_ios_IosWindow__1updateInput</list>
+                            </releaseSymbolsList>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>iossim</id>
+                        <configuration>
+                            <target>ios-sim</target>
+                            <releaseSymbolsList>
+                                <list>_Java_com_sun_glass_ui_ios_IosWindow__1updateBounds</list>
+                                <list>_Java_com_sun_glass_ui_ios_IosWindow__1updateInput</list>
+                            </releaseSymbolsList>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
-
     </build>
 
     <pluginRepositories>
