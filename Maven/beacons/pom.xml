@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.gluonhq.samples</groupId>
+    <artifactId>beacons</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <name>beacons</name>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+        <javafx.version>13</javafx.version>
+        <attach.version>4.0.2</attach.version>
+        <mainClassName>com.gluonhq.beacons.Beacons</mainClassName>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-controls</artifactId>
+            <version>${javafx.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-fxml</artifactId>
+            <version>${javafx.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.gluonhq</groupId>
+            <artifactId>charm-glisten</artifactId>
+            <version>6.0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.gluonhq</groupId>
+            <artifactId>glisten-afterburner</artifactId>
+            <version>2.0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.airhacks</groupId>
+            <artifactId>afterburner.mfx</artifactId>
+            <version>1.6.3</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.annotation</groupId>
+            <artifactId>javax.annotation-api</artifactId>
+            <version>1.3.2</version>
+        </dependency>
+        <dependency>
+            <groupId>com.gluonhq.attach</groupId>
+            <artifactId>ble</artifactId>
+            <version>${attach.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.gluonhq.attach</groupId>
+            <artifactId>display</artifactId>
+            <version>${attach.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.gluonhq.attach</groupId>
+            <artifactId>lifecycle</artifactId>
+            <version>${attach.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.gluonhq.attach</groupId>
+            <artifactId>statusbar</artifactId>
+            <version>${attach.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.gluonhq.attach</groupId>
+            <artifactId>storage</artifactId>
+            <version>${attach.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.gluonhq.attach</groupId>
+            <artifactId>util</artifactId>
+            <version>${attach.version}</version>
+        </dependency>
+    </dependencies>
+
+    <repositories>
+        <repository>
+            <id>Gluon</id>
+            <url>https://nexus.gluonhq.com/nexus/content/repositories/releases</url>
+        </repository>
+    </repositories>
+
+    <profiles>
+        <profile>
+            <!-- To run on desktop with hotspot: mvn -Photspot javafx:run -->
+            <id>hotspot</id>
+            <dependencies>
+                <dependency>
+                    <groupId>com.gluonhq.attach</groupId>
+                    <artifactId>display</artifactId>
+                    <version>${attach.version}</version>
+                    <classifier>desktop</classifier>
+                </dependency>
+                <dependency>
+                    <groupId>com.gluonhq.attach</groupId>
+                    <artifactId>storage</artifactId>
+                    <version>${attach.version}</version>
+                    <classifier>desktop</classifier>
+                </dependency>
+            </dependencies>
+        </profile>
+    </profiles>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <release>11</release>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.openjfx</groupId>
+                <artifactId>javafx-maven-plugin</artifactId>
+                <version>0.0.3</version>
+                <configuration>
+                    <mainClass>${mainClassName}</mainClass>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>com.gluonhq</groupId>
+                <artifactId>client-maven-plugin</artifactId>
+                <version>0.0.12</version>
+                <configuration>
+                    <!-- Uncomment to run on iOS: -->
+                    <!-- <target>ios</target>-->
+                    <attachList>
+                        <list>ble</list>
+                        <list>display</list>
+                        <list>lifecycle</list>
+                        <list>statusbar</list>
+                        <list>storage</list>
+                    </attachList>
+                    <reflectionList>
+                        <list>com.gluonhq.impl.charm.glisten.control.skin.GlistenButtonSkin</list>
+                        <list>com.gluonhq.charm.glisten.application.GlassPane</list>
+                        <list>com.gluonhq.impl.charm.glisten.control.skin.GlistenButtonSkin</list>
+                        <list>com.gluonhq.impl.charm.glisten.control.skin.GlistenSwitchSkin</list>
+                        <list>com.gluonhq.impl.charm.glisten.control.skin.GlistenToggleButtonSkin</list>
+                        <list>com.gluonhq.beacons.settings.Settings</list>
+                        <list>javafx.fxml.FXMLLoader</list>
+                        <list>javafx.scene.layout.BorderPane</list>
+                        <list>javafx.scene.layout.ColumnConstraints</list>
+                        <list>javafx.scene.layout.Priority</list>
+                        <list>javafx.scene.layout.RowConstraints</list>
+                        <list>javafx.geometry.Pos</list>
+                        <list>javafx.geometry.HPos</list>
+                        <list>javafx.geometry.VPos</list>
+                        <list>javafx.geometry.Insets</list>
+                        <list>javafx.scene.paint.Paint</list>
+                        <list>javafx.scene.shape.StrokeType</list>
+                        <list>com.gluonhq.beacons.views.BeaconsPresenter</list>
+                        <list>com.gluonhq.beacons.views.SettingsPresenter</list>
+                        <list>javafx.scene.control.Label</list>
+                        <list>javafx.scene.control.TextField</list>
+                        <list>com.gluonhq.charm.glisten.mvc.View</list>
+                        <list>com.gluonhq.charm.glisten.control.Icon</list>
+                        <list>com.gluonhq.charm.glisten.visual.MaterialDesignIcon</list>
+                        <list>com.gluonhq.charm.glisten.control.SettingsPane</list>
+                    </reflectionList>
+                    <releaseSymbolsList>
+                    <!-- Uncomment to run on iOS: -->
+<!--                        <list>_Java_com_sun_glass_ui_ios_IosWindow__1updateBounds</list>-->
+<!--                        <list>_Java_com_sun_glass_ui_ios_IosWindow__1updateInput</list>-->
+                    </releaseSymbolsList>
+                    <mainClass>${mainClassName}</mainClass>
+                </configuration>
+            </plugin>
+        </plugins>
+
+    </build>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>gluon-releases</id>
+            <url>https://nexus.gluonhq.com/nexus/content/repositories/releases/</url>
+        </pluginRepository>
+    </pluginRepositories>
+</project>
