@@ -3,11 +3,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.gluonhq.samples</groupId>
-    <artifactId>notes</artifactId>
+    <artifactId>comments</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>beacons</name>
+    <name>comments</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -15,7 +15,7 @@
         <maven.compiler.target>11</maven.compiler.target>
         <javafx.version>13</javafx.version>
         <attach.version>4.0.2</attach.version>
-        <mainClassName>com.gluonhq.notes.Notes</mainClassName>
+        <mainClassName>com.gluonhq.comments.Comments</mainClassName>
     </properties>
 
     <dependencies>
@@ -160,6 +160,7 @@
                         <list>javafx.geometry.Insets</list>
                         <list>javafx.scene.control.Button</list>
                         <list>javafx.scene.control.Label</list>
+                        <list>javafx.scene.control.ListView</list>
                         <list>javafx.scene.control.TextArea</list>
                         <list>javafx.scene.control.TextField</list>
                         <list>javafx.scene.control.ToolBar</list>
@@ -169,26 +170,13 @@
                         <list>com.gluonhq.impl.charm.glisten.control.skin.GlistenSwitchSkin</list>
                         <list>com.gluonhq.impl.charm.glisten.control.skin.GlistenToggleButtonSkin</list>
                         <list>com.gluonhq.charm.glisten.mvc.View</list>
-                        <list>com.gluonhq.charm.glisten.control.CharmListView</list>
                         <list>com.gluonhq.charm.glisten.control.Icon</list>
                         <list>com.gluonhq.charm.glisten.visual.MaterialDesignIcon</list>
-                        <list>com.gluonhq.charm.glisten.control.SettingsPane</list>
-                        <list>com.gluonhq.notes.model.Model</list>
-                        <list>com.gluonhq.notes.model.Note</list>
-                        <list>com.gluonhq.notes.model.Settings</list>
-                        <list>com.gluonhq.notes.service.Service</list>
-                        <list>com.gluonhq.notes.views.EditionPresenter</list>
-                        <list>com.gluonhq.notes.views.FilterPresenter</list>
-                        <list>com.gluonhq.notes.views.NotesPresenter</list>
-                        <list>com.gluonhq.notes.views.SettingsPresenter</list>
+                        <list>com.gluonhq.comments.cloud.Service</list>
+                        <list>com.gluonhq.comments.model.Comment</list>
+                        <list>com.gluonhq.comments.views.CommentsPresenter</list>
+                        <list>com.gluonhq.comments.views.EditionPresenter</list>
                     </reflectionList>
-                    <bundlesList>
-                        <list>com/gluonhq/notes/drawer</list>
-                        <list>com.gluonhq.notes.views.edition</list>
-                        <list>com.gluonhq.notes.views.filter</list>
-                        <list>com.gluonhq.notes.views.notes</list>
-                        <list>com.gluonhq.notes.views.settings</list>
-                    </bundlesList>
                     <mainClass>${mainClassName}</mainClass>
                 </configuration>
                 <executions>
