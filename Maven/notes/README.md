@@ -11,18 +11,26 @@ Instructions
 To execute the sample on HotSpot, do as follows:
 
 * Desktop (Windows, Mac OS X, Linux)
-  - Just run it from your IDE or from command line: `./gradlew run`
+  - Just run it from your IDE or from command line: `mvn -Photspot javafx:run`
 
 To execute the sample as native image, do as follows:
 
 * Desktop (Mac OS X, Linux)
-  - Just run it from your IDE or from command line: `./gradlew nativeBuild nativeRun`
+  - Just run it from your IDE or from command line: 
+     - `mvn client:compile`
+     - `mvn client:link` 
+     - `mvn client:run`
 
-* iOS (iOS device, iOS simulator)
-   - Set target = "ios" or target = "ios-sim"
-   - Run `./gradlew nativeBuild`
-   - For iOS device, connect your iOS device with valid signing identity and provisioning profile
-   - Run `./gradlew nativeRun`
+* iOS (iOS simulator)
+   - `mvn client:compile@iossim`
+   - `mvn client:link@iossim`
+   - `mvn client:run@iossim`
+
+* iOS (iOS device)
+   - `mvn client:compile@ios`
+   - `mvn client:link@ios`
+   - Connect your iOS device with valid signing identity and provisioning profile (see [deployment documentation](https://docs.gluonhq.com/client/#_ios_deployment))
+   - Run `mvn client:run@ios`
 
 Documentation
 -------------
