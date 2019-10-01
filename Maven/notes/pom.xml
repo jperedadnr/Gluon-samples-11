@@ -165,7 +165,6 @@
                         <list>javafx.scene.control.ToolBar</list>
                         <list>com.gluonhq.charm.glisten.application.GlassPane</list>
                         <list>com.gluonhq.impl.charm.glisten.control.skin.GlistenButtonSkin</list>
-                        <list>com.gluonhq.impl.charm.glisten.control.skin.GlistenButtonSkin</list>
                         <list>com.gluonhq.impl.charm.glisten.control.skin.GlistenSwitchSkin</list>
                         <list>com.gluonhq.impl.charm.glisten.control.skin.GlistenToggleButtonSkin</list>
                         <list>com.gluonhq.charm.glisten.mvc.View</list>
