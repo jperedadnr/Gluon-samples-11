@@ -22,7 +22,7 @@ dependencies {
 }
 
 gluonClient {
-    target = "ios"  // uncomment to deploy on iOS
+    // target = "ios"  // uncomment to deploy on iOS
 
     attachConfig {
         services 'ble', 'display', 'lifecycle', 'statusbar', 'storage'
