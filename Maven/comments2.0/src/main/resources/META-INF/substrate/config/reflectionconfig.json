@@ -1,0 +1,35 @@
+[
+  {
+    "name":"com.gluonhq.charm.glisten.control.Avatar",
+    "methods":[
+      {"name":"<init>","parameterTypes":[] },
+      {"name":"<init>","parameterTypes":["double"] },
+      {"name":"<init>","parameterTypes":["double","javafx.scene.image.Image"] },
+      {"name":"getRadius","parameterTypes":[] },
+      {"name":"setRadius","parameterTypes":["double"] }
+    ]
+  }
+,
+  {
+    "name":"com.gluonhq.charm.glisten.visual.MaterialDesignIcon",
+    "methods":[
+      {"name":"valueOf","parameterTypes":["java.lang.String"] }
+    ]
+  }
+,
+  {
+    "name":"com.gluonhq.charm.glisten.control.Icon",
+    "methods":[
+      {"name":"<init>","parameterTypes":[] },
+      {"name":"<init>","parameterTypes":["com.gluonhq.charm.glisten.visual.MaterialDesignIcon"] },
+      {"name":"contentProperty","parameterTypes":[] },
+      {"name":"getContent","parameterTypes":[] },
+      {"name":"setContent","parameterTypes":["com.gluonhq.charm.glisten.visual.MaterialDesignIcon"] }
+    ]
+  }
+,
+  {
+    "name":"javax.xml.bind.annotation.XmlTransient",
+    "allDeclaredMethods":true
+  }
+]

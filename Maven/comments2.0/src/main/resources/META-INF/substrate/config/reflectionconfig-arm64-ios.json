@@ -1,0 +1,29 @@
+[
+  {
+    "name":"com.gluonhq.impl.charm.glisten.connect.view.GlistenAuthenticationView",
+    "methods":[
+      {"name":"<init>","parameterTypes":[] }
+    ]
+  }
+,
+  {
+    "name":"com.gluonhq.impl.charm.glisten.connect.view.NetworkConnectView",
+    "methods":[
+      {"name":"<init>","parameterTypes":["com.gluonhq.impl.charm.glisten.connect.view.GlistenAuthenticationView", "com.gluonhq.cloudlink.client.user.LoginMethod"] }
+    ]
+  }
+,
+  {
+    "name":"com.gluonhq.impl.charm.glisten.connect.view.PasswordView",
+    "methods":[
+      {"name":"<init>","parameterTypes":["com.gluonhq.impl.charm.glisten.connect.view.GlistenAuthenticationView", "com.gluonhq.cloudlink.client.user.LoginMethod"] }
+    ]
+  }
+,
+  {
+    "name":"com.gluonhq.impl.cloudlink.client.user.LoginMethodImpl",
+    "methods":[
+      {"name":"<init>","parameterTypes":[] }
+    ]
+  }
+]
