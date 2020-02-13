@@ -33,10 +33,21 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+import java.util.logging.LogManager;
+
 public class Notes extends MobileApplication {
 
     public static final String POPUP_FILTER_NOTES = "Filter Notes";
-    
+
+    static {
+        try {
+            LogManager.getLogManager().readConfiguration(Notes.class.getResourceAsStream("/logging.properties"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     @Override
     public void init() {
         AppViewManager.registerViews(this);

@@ -36,7 +36,7 @@
 
 <View xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gluonhq.notes.views.FilterPresenter">
    <top>
-      <ToolBar fx:id="toolbar" styleClass="top-box">
+      <ToolBar fx:id="toolBar" styleClass="top-box">
             <TextField fx:id="searchField" promptText="%textfield.prompt" />
             <Button mnemonicParsing="false" onAction="#search">
                <graphic>
