@@ -9,7 +9,7 @@
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
 	<key>CFBundleExecutable</key>
-	<string>BeaconsApp</string>
+	<string>beacons</string>
 	<key>CFBundleIconName</key>
 	<string>AppIcon</string>
 	<key>CFBundleName</key>
@@ -45,13 +45,11 @@
 	<string>11.0</string>
 	<key>UIRequiresFullScreen</key>
 	<string>YES</string>
-	<key>NSLocationUsageDescription</key>
-    <string>This app needs location services</string>
     <key>NSLocationWhenInUseUsageDescription</key>
-    <string>This app needs location services</string>
-    <key>NSLocationAlwaysUsageDescription</key>
     <string>This app needs location services</string>
     <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
     <string>This app needs location services</string>
+    <key>NSBluetoothAlwaysUsageDescription</key>
+    <string>This app needs bluetooth services</string>
 </dict>
 </plist>
