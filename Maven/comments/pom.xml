@@ -13,9 +13,11 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
-        <javafx.version>13</javafx.version>
-        <attach.version>4.0.2</attach.version>
+        <javafx.version>15-ea+1</javafx.version>
+        <attach.version>4.0.5</attach.version>
         <mainClassName>com.gluonhq.comments.Comments</mainClassName>
+        <javafx-maven-plugin-version>0.0.4</javafx-maven-plugin-version>
+        <client-maven-plugin-version>0.1.16-SNAPSHOT</client-maven-plugin-version>
     </properties>
 
     <dependencies>
@@ -32,17 +34,35 @@
         <dependency>
             <groupId>com.gluonhq</groupId>
             <artifactId>charm-glisten</artifactId>
-            <version>6.0.1</version>
+            <version>6.0.2</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.openjfx</groupId>
+                    <artifactId>*</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>com.gluonhq</groupId>
             <artifactId>glisten-afterburner</artifactId>
-            <version>2.0.1</version>
+            <version>2.0.2</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.openjfx</groupId>
+                    <artifactId>*</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>com.gluonhq</groupId>
             <artifactId>charm-cloudlink-client</artifactId>
-            <version>6.0.1</version>
+            <version>6.0.2</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.openjfx</groupId>
+                    <artifactId>*</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>javax.annotation</groupId>
@@ -59,7 +79,7 @@
             <artifactId>jakarta.json</artifactId>
             <version>1.1.5</version>
             <classifier>module</classifier>
-<!--            <scope>runtime</scope>-->
+            <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>com.gluonhq.attach</groupId>
@@ -97,8 +117,13 @@
 
     <profiles>
         <profile>
-            <!-- To run on desktop with hotspot: mvn -Photspot javafx:run -->
-            <id>hotspot</id>
+            <id>desktop</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <clientTarget>host</clientTarget>
+            </properties>
             <dependencies>
                 <dependency>
                     <groupId>com.gluonhq.attach</groupId>
@@ -120,6 +145,12 @@
                 </dependency>
             </dependencies>
         </profile>
+        <profile>
+            <id>ios</id>
+            <properties>
+                <clientTarget>ios</clientTarget>
+            </properties>
+        </profile>
     </profiles>
 
     <build>
@@ -136,7 +167,7 @@
             <plugin>
                 <groupId>org.openjfx</groupId>
                 <artifactId>javafx-maven-plugin</artifactId>
-                <version>0.0.3</version>
+                <version>${javafx-maven-plugin-version}</version>
                 <configuration>
                     <mainClass>${mainClassName}</mainClass>
                 </configuration>
@@ -145,8 +176,9 @@
             <plugin>
                 <groupId>com.gluonhq</groupId>
                 <artifactId>client-maven-plugin</artifactId>
-                <version>0.0.12</version>
+                <version>${client-maven-plugin-version}</version>
                 <configuration>
+                    <target>${clientTarget}</target>
                     <attachList>
                         <list>display</list>
                         <list>lifecycle</list>
@@ -155,58 +187,14 @@
                     </attachList>
                     <reflectionList>
                         <list>javafx.fxml.FXMLLoader</list>
-                        <list>javafx.scene.layout.BorderPane</list>
-                        <list>javafx.geometry.Pos</list>
-                        <list>javafx.geometry.Insets</list>
-                        <list>javafx.scene.control.Button</list>
-                        <list>javafx.scene.control.Label</list>
-                        <list>javafx.scene.control.ListView</list>
-                        <list>javafx.scene.control.TextArea</list>
-                        <list>javafx.scene.control.TextField</list>
-                        <list>javafx.scene.control.ToolBar</list>
-                        <list>com.gluonhq.charm.glisten.application.GlassPane</list>
-                        <list>com.gluonhq.impl.charm.glisten.control.skin.GlistenButtonSkin</list>
-                        <list>com.gluonhq.impl.charm.glisten.control.skin.GlistenButtonSkin</list>
-                        <list>com.gluonhq.impl.charm.glisten.control.skin.GlistenSwitchSkin</list>
-                        <list>com.gluonhq.impl.charm.glisten.control.skin.GlistenToggleButtonSkin</list>
-                        <list>com.gluonhq.charm.glisten.mvc.View</list>
-                        <list>com.gluonhq.charm.glisten.control.Icon</list>
-                        <list>com.gluonhq.charm.glisten.visual.MaterialDesignIcon</list>
                         <list>com.gluonhq.comments.cloud.Service</list>
                         <list>com.gluonhq.comments.model.Comment</list>
                         <list>com.gluonhq.comments.views.CommentsPresenter</list>
                         <list>com.gluonhq.comments.views.EditionPresenter</list>
                     </reflectionList>
                     <mainClass>${mainClassName}</mainClass>
+                    <verbose>true</verbose>
                 </configuration>
-                <executions>
-                    <execution>
-                        <id>default-cli</id>
-                        <configuration>
-                            <target>host</target>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>ios</id>
-                        <configuration>
-                            <target>ios</target>
-                            <releaseSymbolsList>
-                                <list>_Java_com_sun_glass_ui_ios_IosWindow__1updateBounds</list>
-                                <list>_Java_com_sun_glass_ui_ios_IosWindow__1updateInput</list>
-                            </releaseSymbolsList>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>iossim</id>
-                        <configuration>
-                            <target>ios-sim</target>
-                            <releaseSymbolsList>
-                                <list>_Java_com_sun_glass_ui_ios_IosWindow__1updateBounds</list>
-                                <list>_Java_com_sun_glass_ui_ios_IosWindow__1updateInput</list>
-                            </releaseSymbolsList>
-                        </configuration>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
     </build>
