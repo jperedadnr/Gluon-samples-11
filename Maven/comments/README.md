@@ -35,26 +35,19 @@ Instructions
 To execute the sample on HotSpot, do as follows:
 
 * Desktop (Windows, Mac OS X, Linux)
-  - Just run it from your IDE or from command line: `mvn -Photspot javafx:run`
+  - Just run it from your IDE or from command line: `mvn javafx:run`
 
 To execute the sample as native image, do as follows:
 
 * Desktop (Mac OS X, Linux)
   - Just run it from your IDE or from command line: 
-     - `mvn client:compile`
-     - `mvn client:link` 
+     - `mvn client:build` 
      - `mvn client:run`
 
-* iOS (iOS simulator)
-   - `mvn client:compile@iossim`
-   - `mvn client:link@iossim`
-   - `mvn client:run@iossim`
-
 * iOS (iOS device)
-   - `mvn client:compile@ios`
-   - `mvn client:link@ios`
+   - `mvn -Pios client:build`
    - Connect your iOS device with valid signing identity and provisioning profile (see [deployment documentation](https://docs.gluonhq.com/client/#_ios_deployment))
-   - Run `mvn client:run@ios`
+   - Run `mvn -Pios client:run`
 
 Documentation
 -------------
