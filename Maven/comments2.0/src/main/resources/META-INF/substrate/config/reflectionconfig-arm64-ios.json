@@ -21,9 +21,22 @@
   }
 ,
   {
+    "name":"com.sun.org.apache.xerces.internal.jaxp.DocumentBuilderFactoryImpl",
+    "allDeclaredConstructors" : true,
+    "allPublicConstructors" : true,
+    "allDeclaredFields" : true,
+    "allPublicFields" : true,
+    "allDeclaredMethods" : true,
+    "allPublicMethods" : true
+  }
+,
+  {
     "name":"com.gluonhq.impl.cloudlink.client.user.LoginMethodImpl",
-    "methods":[
-      {"name":"<init>","parameterTypes":[] }
-    ]
+    "allDeclaredConstructors" : true,
+    "allPublicConstructors" : true,
+    "allDeclaredFields" : true,
+    "allPublicFields" : true,
+    "allDeclaredMethods" : true,
+    "allPublicMethods" : true
   }
 ]

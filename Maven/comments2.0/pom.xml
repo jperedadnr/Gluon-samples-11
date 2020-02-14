@@ -220,6 +220,9 @@
                         <list>statusbar</list>
                         <list>storage</list>
                     </attachList>
+                    <bundlesList>
+                        <list>com.sun.org.apache.xerces.internal.impl.msg.XMLMessages</list>
+                    </bundlesList>
                     <reflectionList>
                         <list>javafx.fxml.FXMLLoader</list>
                         <list>com.gluonhq.comments20.cloud.Service</list>
