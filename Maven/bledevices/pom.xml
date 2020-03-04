@@ -97,8 +97,12 @@
 
     <repositories>
         <repository>
-            <id>Gluon</id>
+            <id>gluon-releases</id>
             <url>https://nexus.gluonhq.com/nexus/content/repositories/releases</url>
+        </repository>
+        <repository>
+            <id>gluon-snapshots</id>
+            <url>https://nexus.gluonhq.com/nexus/content/repositories/public-snapshots/</url>
         </repository>
     </repositories>
 
@@ -190,6 +194,10 @@
         <pluginRepository>
             <id>gluon-releases</id>
             <url>https://nexus.gluonhq.com/nexus/content/repositories/releases/</url>
+        </pluginRepository>
+        <pluginRepository>
+            <id>gluon-snapshots</id>
+            <url>https://nexus.gluonhq.com/nexus/content/repositories/public-snapshots/</url>
         </pluginRepository>
     </pluginRepositories>
 </project>
