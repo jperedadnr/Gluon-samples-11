@@ -100,6 +100,10 @@
             <id>Gluon</id>
             <url>https://nexus.gluonhq.com/nexus/content/repositories/releases</url>
         </repository>
+        <repository>
+            <id>Gluon-SNAPSHOTS</id>
+            <url>https://nexus.gluonhq.com/nexus/content/repositories/public-snapshots</url>
+        </repository>
     </repositories>
 
     <profiles>
@@ -192,6 +196,10 @@
         <pluginRepository>
             <id>gluon-releases</id>
             <url>https://nexus.gluonhq.com/nexus/content/repositories/releases/</url>
+        </pluginRepository>
+        <pluginRepository>
+            <id>Gluon-SNAPSHOTS</id>
+            <url>https://nexus.gluonhq.com/nexus/content/repositories/public-snapshots</url>
         </pluginRepository>
     </pluginRepositories>
 </project>
