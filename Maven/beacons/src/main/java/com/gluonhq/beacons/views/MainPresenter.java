@@ -24,34 +24,38 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.gluonhq.beacons;
+package com.gluonhq.beacons.views;
 
-import com.gluonhq.attach.util.Constants;
-import com.gluonhq.beacons.views.AppViewManager;
-import com.gluonhq.charm.glisten.application.MobileApplication;
-import com.gluonhq.charm.glisten.visual.Swatch;
-import javafx.scene.Scene;
-import javafx.scene.image.Image;
-import javafx.stage.Stage;
+import com.gluonhq.beacons.Beacons;
+import com.gluonhq.charm.glisten.afterburner.GluonPresenter;
+import com.gluonhq.charm.glisten.control.AppBar;
+import com.gluonhq.charm.glisten.mvc.View;
+import com.gluonhq.charm.glisten.visual.MaterialDesignIcon;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 
-public class Beacons extends MobileApplication {
+public class MainPresenter extends GluonPresenter<Beacons> {
 
-    @Override
-    public void init() {
-        System.setProperty(Constants.ATTACH_DEBUG, "true");
-        AppViewManager.registerViews(this);
-    }
+    @FXML
+    private View main;
 
-    @Override
-    public void postInit(Scene scene) {
-        AppViewManager.registerDrawer(this);
-        Swatch.BLUE.assignTo(scene);
+    @FXML
+    private Button scan;
 
-        scene.getStylesheets().add(Beacons.class.getResource("style.css").toExternalForm());
-        ((Stage) scene.getWindow()).getIcons().add(new Image(Beacons.class.getResourceAsStream("/icon.png")));
-    }
+    @FXML
+    private Button broadcast;
 
-    public static void main(String[] args) {
-        launch(args);
+    public void initialize() {
+        main.showingProperty().addListener((obs, oldValue, newValue) -> {
+            if (newValue) {
+                AppBar appBar = getApp().getAppBar();
+                appBar.setNavIcon(MaterialDesignIcon.MENU.button(e -> getApp().getDrawer().open()));
+                appBar.setTitleText("Home");
+            }
+        });
+
+        scan.setOnAction(e -> AppViewManager.BEACONS_VIEW.switchView());
+        broadcast.setOnAction(e -> AppViewManager.BROADCAST_VIEW.switchView());
     }
 }
+

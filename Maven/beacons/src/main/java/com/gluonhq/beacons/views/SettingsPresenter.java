@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016, 2019, Gluon
+ * Copyright (c) 2016, 2020, Gluon
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -57,22 +57,53 @@ public class SettingsPresenter extends GluonPresenter<Beacons> {
     public void initialize() {
         settings.setShowTransitionFactory(BounceInRightTransition::new);
         
-        final Option<StringProperty> uuidOption = new DefaultOption<>(MaterialDesignIcon.BLUETOOTH_SEARCHING.graphic(), 
-        		"Set the UUID", "Set the UUID to be scanned", "Beacon Settings", config.uuidProperty(), true);
-        
-        ((OptionBase<StringProperty>) uuidOption).setLayout(Orientation.VERTICAL);
-        
-        settingsPane.getOptions().add(uuidOption);
         settingsPane.setSearchBoxVisible(false);
         
         settings.showingProperty().addListener((obs, oldValue, newValue) -> {
+            System.out.println("settings newValue = " + newValue);
             if (newValue) {
                 AppBar appBar = getApp().getAppBar();
-                appBar.setNavIcon(MaterialDesignIcon.MENU.button(e -> getApp().getDrawer().open()));
+                appBar.setNavIcon(MaterialDesignIcon.CHEVRON_LEFT.button(e -> getApp().switchToPreviousView()));
                 appBar.setTitleText("Settings");
-                appBar.getActionItems().add(MaterialDesignIcon.SYNC.button(e -> config.setUuid(Settings.UUID)));
+                appBar.getActionItems().add(MaterialDesignIcon.SYNC.button(e -> {
+                    config.setUuid(Settings.UUID);
+                    config.setMajor(Settings.MAJOR);
+                    config.setMinor(Settings.MINOR);
+                    config.setId(Settings.ID);
+                }));
+                settingsPane.setTitleFilter("1");
+                settingsPane.getOptions().clear();
             }
         });
+    }
+
+    void setupScanBeacon() {
+        final Option<StringProperty> uuidOption = new DefaultOption<>(MaterialDesignIcon.BLUETOOTH_SEARCHING.graphic(),
+                "Set the UUID", "Set the UUID to be scanned", "Scan Beacon Settings", config.uuidProperty(), true);
+
+        ((OptionBase<StringProperty>) uuidOption).setLayout(Orientation.VERTICAL);
+
+        settingsPane.getOptions().add(uuidOption);
+        settingsPane.setTitleFilter("");
+    }
+
+    void setupBroadcastBeacon() {
+        final OptionBase<StringProperty> uuidOption = new DefaultOption<>(MaterialDesignIcon.BLUETOOTH_SEARCHING.graphic(),
+                "Set the UUID", "Set the UUID to be scanned", "Beacon Settings", config.uuidProperty(), true);
+
+        uuidOption.setLayout(Orientation.VERTICAL);
+
+        final OptionBase<StringProperty> majorOption = new DefaultOption<>(MaterialDesignIcon.DEVELOPER_MODE.graphic(),
+                "Major value", "Set the major value", "Beacon Settings", config.majorProperty(), true);
+
+        final OptionBase<StringProperty> minorOption = new DefaultOption<>(MaterialDesignIcon.DEVELOPER_BOARD.graphic(),
+                "Minor value", "Set the major value", "Beacon Settings", config.minorProperty(), true);
+
+        final OptionBase<StringProperty> idOption = new DefaultOption<>(MaterialDesignIcon.PERM_IDENTITY.graphic(),
+                "Identifier", "Set the identifier", "Beacon Settings", config.idProperty(), true);
+
+        settingsPane.getOptions().addAll(uuidOption, majorOption, minorOption, idOption);
+        settingsPane.setTitleFilter("");
     }
 }
 

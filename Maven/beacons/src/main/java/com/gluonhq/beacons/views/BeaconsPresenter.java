@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016, 2019, Gluon
+ * Copyright (c) 2016, 2020, Gluon
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -156,19 +156,27 @@ public class BeaconsPresenter extends GluonPresenter<Beacons> {
                     buttonStop.setDisable(true);
 
                     AppBar appBar = getApp().getAppBar();
-                    appBar.setNavIcon(MaterialDesignIcon.MENU.button(e -> 
-                            getApp().getDrawer().open()));
-                    appBar.setTitleText("Beacons");
-                    appBar.getActionItems().addAll(buttonScan, buttonStop);
+                    appBar.setNavIcon(MaterialDesignIcon.CHEVRON_LEFT.button(e ->
+                            getApp().goHome()));
+                    appBar.setTitleText("Scan Beacons");
+                    appBar.getActionItems().addAll(
+                            MaterialDesignIcon.SETTINGS.button(e ->
+                                    AppViewManager.SETTINGS_VIEW.switchView()
+                                            .ifPresent(p -> ((SettingsPresenter) p).setupScanBeacon())),
+                            buttonScan, buttonStop);
                 }
             });
             return null;
         }).orElseGet(() -> {
             beacons.showingProperty().addListener((obs, oldValue, newValue) -> {
                 AppBar appBar = getApp().getAppBar();
-                appBar.setNavIcon(MaterialDesignIcon.MENU.button(e -> 
-                        getApp().getDrawer().open()));
-                appBar.setTitleText("Beacons");
+                appBar.setNavIcon(MaterialDesignIcon.CHEVRON_LEFT.button(e ->
+                        getApp().goHome()));
+                appBar.setTitleText("Scan Beacons");
+                appBar.getActionItems().addAll(
+                        MaterialDesignIcon.SETTINGS.button(e ->
+                                AppViewManager.SETTINGS_VIEW.switchView()
+                                        .ifPresent(p -> ((SettingsPresenter) p).setupScanBeacon())));
             });
             return null;
         });

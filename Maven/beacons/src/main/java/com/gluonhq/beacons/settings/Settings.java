@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016, 2019, Gluon
+ * Copyright (c) 2016, 2020, Gluon
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -32,19 +32,51 @@ import javafx.beans.property.StringProperty;
 public class Settings {
 
 	public static final String UUID = "74278BDA-B644-4520-8F0C-720EAF059935";
-	
-	private final StringProperty uuid = new SimpleStringProperty(UUID);
+	public static final String MAJOR = "5";
+	public static final String MINOR = "1";
+	public static final String ID = "GluonBeacon";
 
+	private final StringProperty uuid = new SimpleStringProperty(UUID);
 	public final StringProperty uuidProperty() {
 		return this.uuid;
 	}
-	
 	public final String getUuid() {
-		return this.uuidProperty().get();
+		return uuid.get();
+	}
+	public final void setUuid(final String uuid) {
+		this.uuid.set(uuid);
 	}
 
-	public final void setUuid(final String uuid) {
-		this.uuidProperty().set(uuid);
+	private final StringProperty major = new SimpleStringProperty(MAJOR);
+	public final StringProperty majorProperty() {
+		return this.major;
 	}
-	
+	public final String getMajor() {
+		return major.get();
+	}
+	public final void setMajor(final String major) {
+		this.major.set(major);
+	}
+
+	private final StringProperty minor = new SimpleStringProperty(MINOR);
+	public final StringProperty minorProperty() {
+		return this.minor;
+	}
+	public final String getMinor() {
+		return minor.get();
+	}
+	public final void setMinor(final String minor) {
+		this.minor.set(minor);
+	}
+
+	private final StringProperty id = new SimpleStringProperty(ID);
+	public final StringProperty idProperty() {
+		return this.id;
+	}
+	public final String getId() {
+		return id.get();
+	}
+	public final void setId(final String id) {
+		this.id.set(id);
+	}
 }

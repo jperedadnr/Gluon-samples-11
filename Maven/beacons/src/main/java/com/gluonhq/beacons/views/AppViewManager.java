@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016, 2019, Gluon
+ * Copyright (c) 2016, 2020, Gluon
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -44,9 +44,11 @@ public class AppViewManager {
 
     public static final AppViewRegistry REGISTRY = new AppViewRegistry();
 
-    public static final AppView BEACONS_VIEW = view("Beacons", BeaconsPresenter.class, MaterialDesignIcon.BLUETOOTH_SEARCHING, SHOW_IN_DRAWER, HOME_VIEW, SKIP_VIEW_STACK);
-    public static final AppView SETTINGS_VIEW = view("Settings", SettingsPresenter.class, MaterialDesignIcon.SETTINGS, SHOW_IN_DRAWER);
-    
+    public static final AppView MAIN_VIEW = view("Home", MainPresenter.class, MaterialDesignIcon.BLUETOOTH_SEARCHING, SHOW_IN_DRAWER, HOME_VIEW, SKIP_VIEW_STACK);
+    public static final AppView BEACONS_VIEW = view("Scan Beacons", BeaconsPresenter.class, MaterialDesignIcon.BLUETOOTH_SEARCHING, SHOW_IN_DRAWER);
+    public static final AppView BROADCAST_VIEW = view("Broadcast Beacon", BroadcastPresenter.class, MaterialDesignIcon.BLUETOOTH_SEARCHING, SHOW_IN_DRAWER);
+    public static final AppView SETTINGS_VIEW = view("Settings", SettingsPresenter.class, MaterialDesignIcon.SETTINGS);
+
     private static AppView view(String title, Class<? extends GluonPresenter<?>> presenterClass, MaterialDesignIcon menuIcon, AppView.Flag... flags ) {
         return REGISTRY.createView(name(presenterClass), title, presenterClass, menuIcon, flags);
     }
