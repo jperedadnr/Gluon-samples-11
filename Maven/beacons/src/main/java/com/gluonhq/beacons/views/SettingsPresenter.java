@@ -60,7 +60,6 @@ public class SettingsPresenter extends GluonPresenter<Beacons> {
         settingsPane.setSearchBoxVisible(false);
         
         settings.showingProperty().addListener((obs, oldValue, newValue) -> {
-            System.out.println("settings newValue = " + newValue);
             if (newValue) {
                 AppBar appBar = getApp().getAppBar();
                 appBar.setNavIcon(MaterialDesignIcon.CHEVRON_LEFT.button(e -> getApp().switchToPreviousView()));

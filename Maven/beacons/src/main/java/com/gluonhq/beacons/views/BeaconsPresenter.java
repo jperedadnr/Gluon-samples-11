@@ -159,7 +159,7 @@ public class BeaconsPresenter extends GluonPresenter<Beacons> {
                     appBar.setNavIcon(MaterialDesignIcon.CHEVRON_LEFT.button(e ->
                             getApp().goHome()));
                     appBar.setTitleText("Scan Beacons");
-                    appBar.getActionItems().addAll(
+                    appBar.getActionItems().setAll(
                             MaterialDesignIcon.SETTINGS.button(e ->
                                     AppViewManager.SETTINGS_VIEW.switchView()
                                             .ifPresent(p -> ((SettingsPresenter) p).setupScanBeacon())),
@@ -173,7 +173,7 @@ public class BeaconsPresenter extends GluonPresenter<Beacons> {
                 appBar.setNavIcon(MaterialDesignIcon.CHEVRON_LEFT.button(e ->
                         getApp().goHome()));
                 appBar.setTitleText("Scan Beacons");
-                appBar.getActionItems().addAll(
+                appBar.getActionItems().setAll(
                         MaterialDesignIcon.SETTINGS.button(e ->
                                 AppViewManager.SETTINGS_VIEW.switchView()
                                         .ifPresent(p -> ((SettingsPresenter) p).setupScanBeacon())));
