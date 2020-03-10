@@ -40,6 +40,8 @@ import javafx.beans.binding.Bindings;
 import javafx.beans.binding.When;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -97,88 +99,80 @@ public class BeaconsPresenter extends GluonPresenter<Beacons> {
     };
     
     public void initialize() {
-        BleService.create().map(bleService -> {
-        
-            Consumer<ScanDetection> callback = (ScanDetection t) -> {
-                javafx.application.Platform.runLater(() -> scanDetection.set(t));
-            };
+        Consumer<ScanDetection> callback = (ScanDetection t) -> {
+            javafx.application.Platform.runLater(() -> scanDetection.set(t));
+        };
 
-            circleFar.setFill(null);
-            circleFar.setStroke(Color.TRANSPARENT);
-            circleFar.strokeProperty().bind(Bindings.createObjectBinding(() -> {
-                if (scanDetection.get() != null && scanDetection.get().getProximity().equals(Proximity.FAR)) {
-                    circleFar.setEffect(new DropShadow(10, Color.GREEN));
-                    return Color.GREEN;
-                }
-                circleFar.setEffect(null);
-                return Color.GRAY;
-            }, labelDistance.textProperty()));
-            circleNear.setFill(null);
-            circleNear.setStroke(Color.TRANSPARENT);
-            circleNear.strokeProperty().bind(Bindings.createObjectBinding(() -> {
-                if (scanDetection.get() != null && scanDetection.get().getProximity().equals(Proximity.NEAR)) {
-                    circleNear.setEffect(new DropShadow(15, Color.GREEN));
-                    return Color.GREEN;
-                }
-                circleNear.setEffect(null);
-                return Color.GRAY;
-            }, labelDistance.textProperty()));
-            circleImmediate.setFill(null);
-            circleImmediate.setStroke(Color.TRANSPARENT);
-            circleImmediate.strokeProperty().bind(Bindings.createObjectBinding(() -> {
-                if (scanDetection.get() != null && scanDetection.get().getProximity().equals(Proximity.IMMEDIATE)) {
-                    circleImmediate.setEffect(new DropShadow(20, Color.GREEN));
-                    return Color.GREEN;
-                }
-                circleImmediate.setEffect(null);
-                return Color.GRAY;
-            }, labelDistance.textProperty()));
+        circleFar.setFill(null);
+        circleFar.setStroke(Color.TRANSPARENT);
+        circleFar.strokeProperty().bind(Bindings.createObjectBinding(() -> {
+            if (scanDetection.get() != null && scanDetection.get().getProximity().equals(Proximity.FAR)) {
+                circleFar.setEffect(new DropShadow(10, Color.GREEN));
+                return Color.GREEN;
+            }
+            circleFar.setEffect(null);
+            return Color.GRAY;
+        }, labelDistance.textProperty()));
+        circleNear.setFill(null);
+        circleNear.setStroke(Color.TRANSPARENT);
+        circleNear.strokeProperty().bind(Bindings.createObjectBinding(() -> {
+            if (scanDetection.get() != null && scanDetection.get().getProximity().equals(Proximity.NEAR)) {
+                circleNear.setEffect(new DropShadow(15, Color.GREEN));
+                return Color.GREEN;
+            }
+            circleNear.setEffect(null);
+            return Color.GRAY;
+        }, labelDistance.textProperty()));
+        circleImmediate.setFill(null);
+        circleImmediate.setStroke(Color.TRANSPARENT);
+        circleImmediate.strokeProperty().bind(Bindings.createObjectBinding(() -> {
+            if (scanDetection.get() != null && scanDetection.get().getProximity().equals(Proximity.IMMEDIATE)) {
+                circleImmediate.setEffect(new DropShadow(20, Color.GREEN));
+                return Color.GREEN;
+            }
+            circleImmediate.setEffect(null);
+            return Color.GRAY;
+        }, labelDistance.textProperty()));
 
-            final Button buttonScan = MaterialDesignIcon.BLUETOOTH_SEARCHING.button();
-            final Button buttonStop = MaterialDesignIcon.STOP.button();
-
-            beacons.showingProperty().addListener((obs, oldValue, newValue) -> {
-                if (newValue) {
-                    buttonScan.setOnAction(e -> {
-                        bleService.stopScanning();
-                        Configuration conf = new Configuration(settings.getUuid());
-                        bleService.startScanning(conf, callback);
-                        buttonStop.setDisable(false);
-                    });
-                    buttonStop.setOnAction(e -> {
-                        bleService.stopScanning();
-                        buttonStop.setDisable(true);
-                    });
-                    labelStatus.textProperty().bind(new When(buttonScan.disableProperty())
-                                    .then("Scanning for: " + settings.getUuid())
-                                    .otherwise("Stopped"));
-                    buttonScan.disableProperty().bind(buttonStop.disableProperty().not());
-                    buttonStop.setDisable(true);
-
-                    AppBar appBar = getApp().getAppBar();
-                    appBar.setNavIcon(MaterialDesignIcon.CHEVRON_LEFT.button(e ->
-                            getApp().goHome()));
-                    appBar.setTitleText("Scan Beacons");
-                    appBar.getActionItems().setAll(
-                            MaterialDesignIcon.SETTINGS.button(e ->
-                                    AppViewManager.SETTINGS_VIEW.switchView()
-                                            .ifPresent(p -> ((SettingsPresenter) p).setupScanBeacon())),
-                            buttonScan, buttonStop);
-                }
-            });
-            return null;
-        }).orElseGet(() -> {
-            beacons.showingProperty().addListener((obs, oldValue, newValue) -> {
+        beacons.showingProperty().addListener((obs, oldValue, newValue) -> {
+            if (newValue) {
                 AppBar appBar = getApp().getAppBar();
                 appBar.setNavIcon(MaterialDesignIcon.CHEVRON_LEFT.button(e ->
                         getApp().goHome()));
                 appBar.setTitleText("Scan Beacons");
-                appBar.getActionItems().setAll(
-                        MaterialDesignIcon.SETTINGS.button(e ->
-                                AppViewManager.SETTINGS_VIEW.switchView()
-                                        .ifPresent(p -> ((SettingsPresenter) p).setupScanBeacon())));
-            });
-            return null;
+                ObservableList<Button> actions =
+                    BleService.create()
+                        .map(bleService -> {
+                            final Button buttonScan = MaterialDesignIcon.BLUETOOTH_SEARCHING.button();
+                            final Button buttonStop = MaterialDesignIcon.STOP.button();
+                            buttonScan.setOnAction(e -> {
+                                bleService.stopScanning();
+                                Configuration conf = new Configuration(settings.getUuid());
+                                bleService.startScanning(conf, callback);
+                                buttonStop.setDisable(false);
+                            });
+                            buttonStop.setOnAction(e -> {
+                                bleService.stopScanning();
+                                buttonStop.setDisable(true);
+                            });
+                            labelStatus.textProperty().bind(new When(buttonScan.disableProperty())
+                                    .then("Scanning for: " + settings.getUuid())
+                                    .otherwise("Stopped"));
+                            buttonScan.disableProperty().bind(buttonStop.disableProperty().not());
+                            buttonStop.setDisable(true);
+
+                            return FXCollections.observableArrayList(
+                                    MaterialDesignIcon.SETTINGS.button(e ->
+                                            AppViewManager.SETTINGS_VIEW.switchView()
+                                                    .ifPresent(p -> ((SettingsPresenter) p).setupScanBeacon())),
+                                    buttonScan, buttonStop);
+                        })
+                        .orElseGet(() -> FXCollections.singletonObservableList(
+                                MaterialDesignIcon.SETTINGS.button(e ->
+                                    AppViewManager.SETTINGS_VIEW.switchView()
+                                            .ifPresent(p -> ((SettingsPresenter) p).setupScanBeacon()))));
+                appBar.getActionItems().setAll(actions);
+            }
         });
     }
     

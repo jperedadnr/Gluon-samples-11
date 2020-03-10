@@ -73,7 +73,7 @@ public class BroadcastPresenter extends GluonPresenter<Beacons> {
                     getApp().goHome()));
             appBar.setTitleText("Broadcast Beacon");
             BleService.create().map(ble ->
-                appBar.getActionItems().setAll(
+                    appBar.getActionItems().setAll(
                         MaterialDesignIcon.SETTINGS.button(e -> AppViewManager.SETTINGS_VIEW.switchView()
                                 .ifPresent(p -> ((SettingsPresenter) p).setupBroadcastBeacon())),
                         MaterialDesignIcon.PLAY_ARROW.button(e -> ble.startBroadcasting(UUID.fromString(labelUUID.getText()),
@@ -81,7 +81,7 @@ public class BroadcastPresenter extends GluonPresenter<Beacons> {
                                 Integer.parseInt(labelMinor.getText()),
                                 labelId.getText())),
                         MaterialDesignIcon.STOP.button(e -> ble.stopBroadcasting())))
-            .orElseGet(() ->
+                .orElseGet(() ->
                     appBar.getActionItems().setAll(
                             MaterialDesignIcon.SETTINGS.button(e -> AppViewManager.SETTINGS_VIEW.switchView()
                                     .ifPresent(p -> ((SettingsPresenter) p).setupBroadcastBeacon()))));
