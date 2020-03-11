@@ -45,6 +45,7 @@ public class AppViewManager {
     public static final AppViewRegistry REGISTRY = new AppViewRegistry();
 
     public static final AppView MAIN_VIEW = view("Home", MainPresenter.class, MaterialDesignIcon.BLUETOOTH_SEARCHING, SHOW_IN_DRAWER, HOME_VIEW, SKIP_VIEW_STACK);
+    public static final AppView BEACON_VIEW = view("Beacon", BeaconPresenter.class, MaterialDesignIcon.BLUETOOTH_CONNECTED);
     public static final AppView BEACONS_VIEW = view("Scan Beacons", BeaconsPresenter.class, MaterialDesignIcon.BLUETOOTH_SEARCHING, SHOW_IN_DRAWER);
     public static final AppView BROADCAST_VIEW = view("Broadcast Beacon", BroadcastPresenter.class, MaterialDesignIcon.BLUETOOTH_SEARCHING, SHOW_IN_DRAWER);
     public static final AppView SETTINGS_VIEW = view("Settings", SettingsPresenter.class, MaterialDesignIcon.SETTINGS);

@@ -180,6 +180,7 @@
                     <reflectionList>
                         <list>javafx.fxml.FXMLLoader</list>
                         <list>com.gluonhq.beacons.settings.Settings</list>
+                        <list>com.gluonhq.beacons.views.BeaconPresenter</list>
                         <list>com.gluonhq.beacons.views.BeaconsPresenter</list>
                         <list>com.gluonhq.beacons.views.BroadcastPresenter</list>
                         <list>com.gluonhq.beacons.views.MainPresenter</list>
