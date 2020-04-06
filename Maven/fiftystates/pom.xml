@@ -15,7 +15,7 @@
         <maven.compiler.target>11</maven.compiler.target>
         <javafx.version>15-ea+1</javafx.version>
         <attach.version>4.0.5</attach.version>
-        <mainClassName>com.gluonhq.fiftystates.FiftyStates </mainClassName>
+        <mainClassName>com.gluonhq.fiftystates.FiftyStates</mainClassName>
         <javafx-maven-plugin-version>0.0.4</javafx-maven-plugin-version>
         <client-maven-plugin-version>0.1.16-SNAPSHOT</client-maven-plugin-version>
     </properties>

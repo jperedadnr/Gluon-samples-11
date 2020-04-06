@@ -41,10 +41,12 @@ import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.beans.value.ChangeListener;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
 public class BleDevicesPresenter extends GluonPresenter<BleDevices> {
 
+    private boolean scanning = false;
 
     @FXML
     private View bleDevices;
@@ -138,10 +140,21 @@ public class BleDevicesPresenter extends GluonPresenter<BleDevices> {
                 appBar.setNavIcon(MaterialDesignIcon.MENU.button(e ->
                         getApp().getDrawer().open()));
                 appBar.setTitleText("BLE Devices");
-                appBar.getActionItems().add(MaterialDesignIcon.SCANNER.button(e -> {
-                    BleService.create().ifPresent(ble ->
-                            deviceList.setItems(ble.startScanningDevices()));
-                }));
+                Button scanButton = new Button(null, MaterialDesignIcon.SCANNER.graphic());
+                scanButton.setOnAction(e -> {
+                    BleService.create().ifPresent(ble -> {
+                        if (!scanning) {
+                            deviceList.setItems(ble.startScanningDevices());
+                            scanning = true;
+                            scanButton.setGraphic(MaterialDesignIcon.CANCEL.graphic());
+                        } else {
+                            ble.stopScanningDevices();
+                            scanning = false;
+                            scanButton.setGraphic(MaterialDesignIcon.SCANNER.graphic());
+                        }
+                    });
+                });
+                appBar.getActionItems().add(scanButton);
             }
         });
     }

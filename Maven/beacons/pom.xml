@@ -17,7 +17,7 @@
         <attach.version>4.0.6-SNAPSHOT</attach.version>
         <mainClassName>com.gluonhq.beacons.Beacons</mainClassName>
         <javafx-maven-plugin-version>0.0.4</javafx-maven-plugin-version>
-        <client-maven-plugin-version>0.1.17-SNAPSHOT</client-maven-plugin-version>
+        <client-maven-plugin-version>0.1.20-SNAPSHOT</client-maven-plugin-version>
     </properties>
 
     <dependencies>
@@ -186,7 +186,7 @@
                         <list>com.gluonhq.beacons.views.MainPresenter</list>
                         <list>com.gluonhq.beacons.views.SettingsPresenter</list>
                     </reflectionList>
-                    <verbose>true</verbose>
+<!--                    <verbose>true</verbose>-->
                     <mainClass>${mainClassName}</mainClass>
                 </configuration>
             </plugin>
