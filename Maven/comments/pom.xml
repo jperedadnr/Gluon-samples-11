@@ -13,11 +13,11 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
-        <javafx.version>15-ea+1</javafx.version>
-        <attach.version>4.0.5</attach.version>
+        <javafx.version>15-ea+2</javafx.version>
+        <attach.version>4.0.6-SNAPSHOT</attach.version>
         <mainClassName>com.gluonhq.comments.Comments</mainClassName>
         <javafx-maven-plugin-version>0.0.4</javafx-maven-plugin-version>
-        <client-maven-plugin-version>0.1.16-SNAPSHOT</client-maven-plugin-version>
+        <client-maven-plugin-version>0.1.20-SNAPSHOT</client-maven-plugin-version>
     </properties>
 
     <dependencies>
@@ -34,7 +34,7 @@
         <dependency>
             <groupId>com.gluonhq</groupId>
             <artifactId>charm-glisten</artifactId>
-            <version>6.0.2</version>
+            <version>6.0.3</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.openjfx</groupId>
@@ -45,7 +45,7 @@
         <dependency>
             <groupId>com.gluonhq</groupId>
             <artifactId>glisten-afterburner</artifactId>
-            <version>2.0.2</version>
+            <version>2.0.3</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.openjfx</groupId>
@@ -56,7 +56,7 @@
         <dependency>
             <groupId>com.gluonhq</groupId>
             <artifactId>charm-cloudlink-client</artifactId>
-            <version>6.0.2</version>
+            <version>6.0.3</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.openjfx</groupId>
@@ -146,6 +146,12 @@
             </dependencies>
         </profile>
         <profile>
+            <id>android</id>
+            <properties>
+                <clientTarget>android</clientTarget>
+            </properties>
+        </profile>
+        <profile>
             <id>ios</id>
             <properties>
                 <clientTarget>ios</clientTarget>
@@ -192,6 +198,9 @@
                         <list>com.gluonhq.comments.views.CommentsPresenter</list>
                         <list>com.gluonhq.comments.views.EditionPresenter</list>
                     </reflectionList>
+                    <bundlesList>
+                        <list>org.glassfish.json.messages</list>
+                    </bundlesList>
                     <mainClass>${mainClassName}</mainClass>
                     <verbose>true</verbose>
                 </configuration>
