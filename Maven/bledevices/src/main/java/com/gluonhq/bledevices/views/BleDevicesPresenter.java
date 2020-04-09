@@ -140,7 +140,8 @@ public class BleDevicesPresenter extends GluonPresenter<BleDevices> {
                 appBar.setNavIcon(MaterialDesignIcon.MENU.button(e ->
                         getApp().getDrawer().open()));
                 appBar.setTitleText("BLE Devices");
-                Button scanButton = new Button(null, MaterialDesignIcon.SCANNER.graphic());
+                Button scanButton = new Button(null,
+                        scanning ? MaterialDesignIcon.CANCEL.graphic() : MaterialDesignIcon.SCANNER.graphic());
                 scanButton.setOnAction(e -> {
                     BleService.create().ifPresent(ble -> {
                         if (!scanning) {
